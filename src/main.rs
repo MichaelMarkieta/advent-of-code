@@ -16,7 +16,7 @@ fn d01_data() -> Vec<i32> {
 }
 
 fn d01p01(expense_report: &Vec<i32>) {
-    let answer1: i32;
+    let answer: i32;
     let mut expense_report_hashmap: HashMap<i32, i32> = HashMap::new();
     for itm in expense_report.iter() {
         let itm_remainder = 2020 - itm;
@@ -24,22 +24,22 @@ fn d01p01(expense_report: &Vec<i32>) {
             expense_report_hashmap.insert(*itm, itm_remainder);
         } else {
             println!("We found a pair of values that add up to 2020: {} and {}", itm, itm_remainder);
-            answer1 = itm * itm_remainder;
-            println!("Multiply them together and get: {}", answer1);
+            answer = itm * itm_remainder;
+            println!("Multiply them together and get: {}", answer);
             return
         }
     }
 }
 
 fn d01p02(expense_report: &Vec<i32>) {
-    let answer2: i32;
+    let answer: i32;
     for itm_a in expense_report.iter() {
         for itm_b in expense_report.iter() {
             for itm_c in expense_report.iter() {
                 if itm_a + itm_b + itm_c == 2020 {
                     println!("We found three values that add up to 2020: {}, {} and {}", itm_a, itm_b, itm_c);
-                    answer2 = itm_a * itm_b * itm_c;
-                    println!("Multiply them together and get: {}", answer2);
+                    answer = itm_a * itm_b * itm_c;
+                    println!("Multiply them together and get: {}", answer);
                     return
                 }
             }   
