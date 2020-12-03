@@ -2,6 +2,19 @@ use std::env;
 use std::collections::HashMap;
 use reqwest;
 
+fn d01_data() -> Vec<i32> {
+    let aoc_session_id = env::var("AOC_SESSION_ID").unwrap_or("none".to_string());
+    let client = reqwest::blocking::Client::new();
+    let response = client
+        .get("https://adventofcode.com/2020/day/1/input")
+        .header("cookie", format!("session={}", aoc_session_id))
+        .send()
+        .unwrap()
+        .text()
+        .unwrap();
+    response.trim_end().split("\n").map(|x| x.parse::<i32>().unwrap()).collect()
+}
+
 fn d01p01(expense_report: &Vec<i32>) {
     let answer1: i32;
     let mut expense_report_hashmap: HashMap<i32, i32> = HashMap::new();
@@ -35,19 +48,7 @@ fn d01p02(expense_report: &Vec<i32>) {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let aoc_session_id = env::var("AOC_SESSION_ID").unwrap_or("none".to_string());
-
-    let client = reqwest::blocking::Client::new();
-    let response = client
-        .get("https://adventofcode.com/2020/day/1/input")
-        .header("cookie", format!("session={}", aoc_session_id))
-        .send()
-        .unwrap()
-        .text()
-        .unwrap();
-
-    let expense_report = response.trim_end().split("\n").map(|x| x.parse::<i32>().unwrap()).collect();
-
+    let expense_report = d01_data();
     d01p01(&expense_report);
     d01p02(&expense_report);
 
