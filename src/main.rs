@@ -47,10 +47,8 @@ fn d01p02(expense_report: &Vec<i32>) {
     }
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() {
     let expense_report = d01_data();
     d01p01(&expense_report);
     d01p02(&expense_report);
-
-    Ok(())
 }
