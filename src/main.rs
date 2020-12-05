@@ -1,54 +1,32 @@
 use std::env;
-use std::collections::HashMap;
 use reqwest;
 
-fn d01_data() -> Vec<i32> {
+pub mod d01;
+pub mod d02;
+
+use d01::d01;
+
+fn get_data(day: i32) -> Vec<String> {
     let aoc_session_id = env::var("AOC_SESSION_ID").unwrap_or("none".to_string());
     let client = reqwest::blocking::Client::new();
+    let url = format!("https://adventofcode.com/2020/day/{}/input", day);
     let response = client
-        .get("https://adventofcode.com/2020/day/1/input")
+        .get(&url)
         .header("cookie", format!("session={}", aoc_session_id))
         .send()
         .unwrap()
         .text()
         .unwrap();
-    response.trim_end().split("\n").map(|x| x.parse::<i32>().unwrap()).collect()
-}
-
-fn d01p01(expense_report: &Vec<i32>) {
-    let answer: i32;
-    let mut expense_report_hashmap: HashMap<i32, i32> = HashMap::new();
-    for itm in expense_report.iter() {
-        let itm_remainder = 2020 - itm;
-        if !expense_report_hashmap.contains_key(&itm_remainder) {
-            expense_report_hashmap.insert(*itm, itm_remainder);
-        } else {
-            println!("We found a pair of values that add up to 2020: {} and {}", itm, itm_remainder);
-            answer = itm * itm_remainder;
-            println!("Multiply them together and get: {}", answer);
-            return
-        }
-    }
-}
-
-fn d01p02(expense_report: &Vec<i32>) {
-    let answer: i32;
-    for itm_a in expense_report.iter() {
-        for itm_b in expense_report.iter() {
-            for itm_c in expense_report.iter() {
-                if itm_a + itm_b + itm_c == 2020 {
-                    println!("We found three values that add up to 2020: {}, {} and {}", itm_a, itm_b, itm_c);
-                    answer = itm_a * itm_b * itm_c;
-                    println!("Multiply them together and get: {}", answer);
-                    return
-                }
-            }   
-        }
-    }
+    let data: Vec<String> = response.trim_end().split("\n").map(|s| s.to_string()).collect();
+    return data
 }
 
 fn main() {
-    let expense_report = d01_data();
-    d01p01(&expense_report);
-    d01p02(&expense_report);
+    let args: Vec<String> = env::args().collect();
+    let day: i32 = args[1].parse::<i32>().unwrap();
+    let data = get_data(day);
+    match day {
+        1 => d01(data),
+        _ => println!("Not ready for that day yet!"),
+    }
 }
