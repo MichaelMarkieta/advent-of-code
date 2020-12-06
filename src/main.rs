@@ -3,9 +3,11 @@ use reqwest;
 
 pub mod d01;
 pub mod d02;
+pub mod d03;
 
 use d01::d01;
 use d02::d02;
+use d03::d03;
 
 fn get_data(day: i32) -> Vec<String> {
     let aoc_session_id = env::var("AOC_SESSION_ID").unwrap_or("none".to_string());
@@ -28,6 +30,7 @@ fn main() {
     match day {
         1 => d01(data),
         2 => d02(data),
+        3 => d03(data),
         _ => println!("Not ready for that day yet!"),
     }
 }
