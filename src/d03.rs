@@ -1,4 +1,4 @@
-fn d03p01(map: &Vec<String>){
+fn d03p01(map: &Vec<String>) {
     let mut encountered: Vec<String> = Vec::new();
     let mut x: i32 = 0;
     for row in map {
@@ -15,10 +15,10 @@ fn d03p01(map: &Vec<String>){
 
 pub fn d03(data: Vec<String>) {
     let line_length = data[0].len() as f32;
-    let line_length_required = (line_length / 3.0) as f32;
+    let line_length_dividend = (line_length / 3.0) as f32;
     let num_lines = data.len() as f32;
-    let line_length_factor = ((num_lines / line_length_required) as f32).ceil() as usize;
-    
+    let line_length_factor = ((num_lines / line_length_dividend) as f32).ceil() as usize;
+
     let mut map: Vec<String> = Vec::new();
     for line in data {
         let repeated_line = line.repeat(line_length_factor);
