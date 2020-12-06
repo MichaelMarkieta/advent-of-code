@@ -20,7 +20,11 @@ fn get_data(day: i32) -> Vec<String> {
         .unwrap()
         .text()
         .unwrap();
-    response.trim_end().split("\n").map(|s| s.to_string()).collect::<Vec<String>>()
+    response
+        .trim_end()
+        .split("\n")
+        .map(|s| s.to_string())
+        .collect::<Vec<String>>()
 }
 
 fn main() {
