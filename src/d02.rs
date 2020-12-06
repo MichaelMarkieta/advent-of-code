@@ -8,7 +8,6 @@ struct Policy {
 
 fn d02p01(policies: &Vec<Policy>) {
     let mut good_passwords = 0;
-    let mut _bad_passwords = 0;
     for policy in policies {
         let min = policy.min;
         let max = policy.max;
