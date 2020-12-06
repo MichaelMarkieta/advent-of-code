@@ -19,6 +19,28 @@ fn d02p01(policies: &Vec<Policy>) {
     println!("Answer to d02p01: {}", good_passwords);
 }
 
+fn d02p02(policies: &Vec<Policy>) {
+    let mut good_passwords = 0;
+    for policy in policies {
+        let pos1_char: String;
+        let pos2_char: String;
+        match policy.password.chars().nth(policy.min as usize - 1) {
+            Some(v) => pos1_char = v.to_string(),
+            None => pos1_char = "".to_string(),
+        }
+        match policy.password.chars().nth(policy.max as usize - 1) {
+            Some(v) => pos2_char = v.to_string(),
+            None => pos2_char = "".to_string(),
+        }
+        if pos1_char == policy.char && pos2_char == policy.char {
+            continue
+        } else if pos1_char == policy.char || pos2_char == policy.char {
+            good_passwords += 1;
+        }
+    }
+    println!("Answer to d02p02: {}", good_passwords);
+}
+
 pub fn d02(data: Vec<String>) {  
     let mut passwords: Vec<Policy> = Vec::new(); // [{password:p,min:x,max:y,char:z,}]
 
@@ -41,4 +63,5 @@ pub fn d02(data: Vec<String>) {
     }
 
     d02p01(&passwords);
+    d02p02(&passwords);
 }
