@@ -15,14 +15,11 @@ fn d02p01(policies: &Vec<Policy>) {
         let count = policy.password.matches(&policy.char).count() as u16;
         if count >= min && count <= max {
             good_passwords += 1;
-            // println!("{}, {}, {}, {}, {}, {}", &policy.char, min, max, count, password, true);
         } else {
-            _bad_passwords += 1;
-            // println!("{}, {}, {}, {}, {}, {}", &policy.char, min, max, count, password, false);
+            continue
         }
     }
     println!("Answer to d02p01: {}", good_passwords);
-    println!("{}, {}", good_passwords, _bad_passwords);
 }
 
 pub fn d02(data: Vec<String>) {  
