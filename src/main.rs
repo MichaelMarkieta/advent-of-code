@@ -5,6 +5,7 @@ pub mod d01;
 pub mod d02;
 
 use d01::d01;
+use d02::d02;
 
 fn get_data(day: i32) -> Vec<String> {
     let aoc_session_id = env::var("AOC_SESSION_ID").unwrap_or("none".to_string());
@@ -17,8 +18,7 @@ fn get_data(day: i32) -> Vec<String> {
         .unwrap()
         .text()
         .unwrap();
-    let data: Vec<String> = response.trim_end().split("\n").map(|s| s.to_string()).collect();
-    return data
+    response.trim_end().split("\n").map(|s| s.to_string()).collect::<Vec<String>>()
 }
 
 fn main() {
@@ -27,6 +27,7 @@ fn main() {
     let data = get_data(day);
     match day {
         1 => d01(data),
+        2 => d02(data),
         _ => println!("Not ready for that day yet!"),
     }
 }
