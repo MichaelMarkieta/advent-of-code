@@ -25,7 +25,7 @@ pub fn d02(data: Vec<String>) {
     let mut passwords: Vec<Policy> = Vec::new(); // [{password:p,min:x,max:y,char:z,}]
 
     for line in data {
-        let line_split = line.split(":").map(|s| s.trim_start().trim_end().to_string()).collect::<Vec<String>>();
+        let line_split = line.split(": ").map(|s| s.to_string()).collect::<Vec<String>>();
         let policy = &line_split[0];
         let password = &line_split[1];
         let policy_parts: Vec<&str> = policy.split_whitespace().collect();
