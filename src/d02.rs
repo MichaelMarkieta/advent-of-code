@@ -9,10 +9,8 @@ struct Policy {
 fn d02p01(policies: &Vec<Policy>) {
     let mut good_passwords = 0;
     for policy in policies {
-        let min = policy.min;
-        let max = policy.max;
         let count = policy.password.matches(&policy.char).count() as u16;
-        if count >= min && count <= max {
+        if count >= policy.min && count <= policy.max {
             good_passwords += 1;
         } else {
             continue
